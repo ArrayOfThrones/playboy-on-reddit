@@ -3,7 +3,7 @@
 Optimized for python 3.6
 
 Bot for monitoring hot posts in some playboy´s subreddits. 
-Once a new post is found, a repost is made at [r/PlayboyOnReddit](https://www.reddit.com/r/playboyonreddit/)
+Once a new post is found, a repost is made at [r/PlayboyOnReddit](https://www.reddit.com/r/playboyonreddit/).
 
 Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit/) are meant to be made only by this bot. 
 
