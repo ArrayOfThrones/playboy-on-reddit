@@ -2,10 +2,10 @@
 
 Optimized for python 3.6
 
-This project aims on monitoring hot posts some playbou /r and
-repost it into [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit).
+Bot for monitoring hot posts in playboy´s subreddit. 
+Once a new post is found, a repost is made at [r/PlayboyOnReddit](https://www.reddit.com/r/playboyonreddit/)
 
-Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit) are meant to be made only by this bot. 
+Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit/) are meant to be made only by this bot. 
 
 ----------------------
 
@@ -23,7 +23,7 @@ just run the following command:
 
 ```bash 
 .
-└── automatic-octo-template
+└── PlayboyOnReddit
     ├── data
     │   └── submissions_processed.txt
     ├── docs
@@ -80,11 +80,11 @@ For running it, on the `~/src` directory just run the follow command:
   ],
   "SUBREDDITS_TO_MONITOR" : [
     "playboy", 
-    ",Playboy_Albuns"
+    "Playboy_Albums"
   ],
   "SEARCH_LIMIT": 1,
   "WAIT_TIME": 3,
-  "POST_MODE": "comment",
+  "POST_MODE": "direct",
   "REQUIRED_SCORE": 500
 }
 ````
