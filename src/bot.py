@@ -53,14 +53,19 @@ class Bot:
         self.new_post(post_to, new_post_title, new_post_url, source_url)
         logging.info(new_post_title)
 
-    def process_comment(self, submission):
+        return new_post_url, new_post_title
+
+    @staticmethod
+    def process_comment(submission, post_url, post_title):
         x_post = "[r/{}] ".format(submission.subreddit.display_name)
-        body = """
-        "I'm a bot. This post has been linked to another place on reddit.
-        
-        u"\u2022" [[r/playboyonreddit](https://www.reddit.com/r/)] [[{x_post}](https://www.reddit.com/r/{sub_x})]
-        
-        """.format(x_post=x_post, sub_x=submission.subreddit.display_name)
+        playboy_on_reddit = \
+            '[r/playboyonreddit](https://www.reddit.com/r/playboyonreddit)'
+        sub_ = '[{}](https://www.reddit.com/r/{})'.format(
+            x_post, submission.subreddit.display_name)
+        post_ = '[{}]({})'.format(post_title, post_url)
+
+        body = "reddit.\n\n    \u2022 [{}] [{}] {}.".\
+            format(playboy_on_reddit, sub_, post_)
 
         submission.reply(body)
 
@@ -82,9 +87,8 @@ class Bot:
                     hot(limit=self.credentials.get('SEARCH_LIMIT')):
                 if submission.id in submissions_found:
                     break
-
-                self.process_submission(submission)
-                self.process_comment(submission)
+                post_url, post_title = self.process_submission(submission)
+                self.process_comment(submission, post_url, post_title)
                 submissions_found.append(submission.id)
                 counter += 1
 
