@@ -11,11 +11,12 @@ Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit/) are mean
 
 ### Dependencies
 
-
 For installing the requirements, in your ___venv___ or ___anaconda env___, 
 just run the following command:
 
-`pip install -r requirements.txt`
+```shell script
+pip install -r requirements.txt
+```
 
 ----------------
 
@@ -88,4 +89,11 @@ For running it, on the `~/src` directory just run the follow command:
   "REQUIRED_SCORE": 500
 }
 ````
+---------------
+
+#### Monitored r/
+
+- [r/Playboy](https://www.reddit.com/r/playboy)
+- [r/Playboy_Albums](https://www.reddit.com/r/playboy_albums)
+
 ---------------
