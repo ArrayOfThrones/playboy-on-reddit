@@ -60,33 +60,29 @@ Section aimed on clarifying some running issues.
 
 #### Running
 
-For running it, on the `~/src` directory just run the follow command:
+For running it, at the `~/src` directory just run the follow command:
 
-`python bot.py` 
+```shell script
+python bot.py
+``` 
 
 #### JSON Structure
 
 ````json
 {
-  "USER_AGENT": "Bot for running PlayboyOnReddit - created by u/brnpaes.",
+  "USER_AGENT": "Created by u/brnpaes.",
   "USERNAME": "username",
   "PASSWORD": "password",
   "CLIENT_ID": "client_id",
   "CLIENT_SECRET": "client_secret",
   "SUBREDDIT_TO_POST": "PlayboyOnReddit",
-  "EXPRESSIONS_TO_MONITOR" : [
-    "playboy",
-    "playboy international",
-    "playboy us"
-  ],
   "SUBREDDITS_TO_MONITOR" : [
     "playboy", 
     "Playboy_Albums"
   ],
   "SEARCH_LIMIT": 1,
   "WAIT_TIME": 3,
-  "POST_MODE": "direct",
-  "REQUIRED_SCORE": 500
+  "POST_MODE": "direct"
 }
 ````
 ---------------

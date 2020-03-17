@@ -11,6 +11,5 @@
   ],
   "SEARCH_LIMIT": 1,
   "WAIT_TIME": 3,
-  "POST_MODE": "direct",
-  "REQUIRED_SCORE": 500
+  "POST_MODE": "direct"
 }
