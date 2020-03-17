@@ -1,15 +1,19 @@
-## automatic-octo-template
+## PlayboyOnReddit
 
 Optimized for python 3.6
 
-This is a project template. Used in other repositories.
+This project aims on monitoring hot posts some playbou /r and
+repost it into [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit).
+
+Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit) are meant to be made only by this bot. 
 
 ----------------------
 
 ### Dependencies
 
-For developers, python requirements could be find in the project's root. For installing the requirements, 
-in your ___venv___ or ___anaconda env___, just run the following command:
+
+For installing the requirements, in your ___venv___ or ___anaconda env___, 
+just run the following command:
 
 `pip install -r requirements.txt`
 
@@ -21,13 +25,15 @@ in your ___venv___ or ___anaconda env___, just run the following command:
 .
 └── automatic-octo-template
     ├── data
-    │   └── settings.json
+    │   └── submissions_processed.txt
     ├── docs
     │   ├── reference_articles
     │   ├── ...
     │   └── CREDITS
     ├── src
     │   ├── __init__.py
+    │   ├── bot.py
+    │   ├── helpers.py
     │   └── bot.py
     ├── tests
     │   └── unittests
@@ -41,7 +47,6 @@ in your ___venv___ or ___anaconda env___, just run the following command:
 
 #### Directory description
 
-- __data:__ The data dir. Group of non-script support files.
 - __docs:__ The documentation dir.
 - __src:__ The scripts & source code dir.
 - __tests:__ The unittests dir.
@@ -50,35 +55,37 @@ in your ___venv___ or ___anaconda env___, just run the following command:
 
 ### Usage Notes
 
+Section aimed on clarifying some running issues.
+
 #### Running
 
 For running it, on the `~/src` directory just run the follow command:
 
-`python automatic_octo.py` 
+`python bot.py` 
 
-#### Notes
+#### JSON Structure
 
-- Just a few notes
-
+````json
+{
+  "USER_AGENT": "Bot for running PlayboyOnReddit - created by u/brnpaes.",
+  "USERNAME": "username",
+  "PASSWORD": "password",
+  "CLIENT_ID": "client_id",
+  "CLIENT_SECRET": "client_secret",
+  "SUBREDDIT_TO_POST": "PlayboyOnReddit",
+  "EXPRESSIONS_TO_MONITOR" : [
+    "playboy",
+    "playboy international",
+    "playboy us"
+  ],
+  "SUBREDDITS_TO_MONITOR" : [
+    "playboy", 
+    ",Playboy_Albuns"
+  ],
+  "SEARCH_LIMIT": 1,
+  "WAIT_TIME": 3,
+  "POST_MODE": "comment",
+  "REQUIRED_SCORE": 500
+}
+````
 ---------------
-
-### Versioning
-
-This project is under development.
-
-#### Roadmap
-
-__It needed to:__
-
-- Develop the feature #0
-    - feature #0.1:
-        - Techniques:
-            - technique #0
-            - technique #1
-            - technique #2
-    - feature #0.2:
-        - technology #0
-
-- Develop the feature #1
-
---------------

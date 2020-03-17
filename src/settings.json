@@ -1,0 +1,16 @@
+{
+  "USER_AGENT": "Created by u/brnpaes.",
+  "USERNAME": "brnpaes",
+  "PASSWORD": "13112766",
+  "CLIENT_ID": "H5SoyNl14zTjVQ",
+  "CLIENT_SECRET": "0RJmTHumxR6AyM0FdFjLwi9Jzpo",
+  "SUBREDDIT_TO_POST": "PlayboyOnReddit",
+  "SUBREDDITS_TO_MONITOR" : [
+    "Playboy",
+    "Playboy_Albums"
+  ],
+  "SEARCH_LIMIT": 1,
+  "WAIT_TIME": 3,
+  "POST_MODE": "direct",
+  "REQUIRED_SCORE": 500
+}

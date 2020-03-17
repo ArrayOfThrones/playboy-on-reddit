@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from helpers import read_json
 
 import logging
@@ -19,9 +20,14 @@ class Bot:
 
     def authenticate(self):
         logging.info("Authenticating...")
-        reddit = praw.Reddit(user_agent=self.credentials.get('USER_AGENT'),
-                             client_id=self.credentials.get('CLIENT_ID'),
-                             client_secret=self.credentials.get('CLIENT_SECRET'))
+        reddit = praw.Reddit(
+            user_agent=self.credentials.get('USER_AGENT'),
+            client_id=self.credentials.get('CLIENT_ID'),
+            client_secret=self.credentials.get('CLIENT_SECRET'),
+            username=self.credentials.get('USERNAME'),
+            password=self.credentials.get('PASSWORD')
+        )
+
         logging.info("Authenticated as {}".format(reddit.user.me()))
 
         return reddit
@@ -34,8 +40,7 @@ class Bot:
 
         new_post_title = x_post + title
 
-        if len(
-                new_post_title) > 293:
+        if len(new_post_title) > 293:
             new_post_title = new_post_title[0:290] + '...'
 
         if submission.over_18:
@@ -48,6 +53,17 @@ class Bot:
         self.new_post(post_to, new_post_title, new_post_url, source_url)
         logging.info(new_post_title)
 
+    def process_comment(self, submission):
+        x_post = "[r/{}] ".format(submission.subreddit.display_name)
+        body = """
+        "I'm a bot. This post has been linked to another place on reddit.
+        
+        u"\u2022" [[r/playboyonreddit](https://www.reddit.com/r/)] [[{x_post}](https://www.reddit.com/r/{sub_x})]
+        
+        """.format(x_post=x_post, sub_x=submission.subreddit.display_name)
+
+        submission.reply(body)
+
     def new_post(self, subreddit, title, url, source_url):
         if self.credentials.get('POST_MODE') == 'direct':
             post = subreddit.submit(title, url=url)
@@ -57,57 +73,40 @@ class Bot:
         elif self.credentials.get('POST_MODE') == 'comment':
             subreddit.submit(title, url=source_url)
         else:
-            logging.ERROR(
-                'Invalid POST_MODE chosen. Select "direct" or "comment".')
-
-    def is_blacklisted(self, title):
-        is_black = False
-
-        for ignored in self.credentials.get('BLACKLISTED'):
-            ignored_words = ignored.split('-')
-
-            if all(word in title for word in ignored_words):
-                is_black = True
-
-        return is_black
+            logging.ERROR('Invalid POST_MODE chosen.')
 
     def monitor(self, submissions_found):
         counter = 0
-        for submission in self.reddit.subreddit(
-                self.credentials.get('SUBREDDITS_TO_MONITOR')).\
-                hot(limit=self.credentials.get('SEARCH_LIMIT')):
-            for expression in self.credentials.get('EXPRESSIONS_TO_MONITOR'):
-                if (expression in submission.title.lower()) and \
-                        (submission.id not in submissions_found):
-                    ignore_submission = \
-                        self.is_blacklisted(submission.title.lower())
+        for sub_reddit in self.credentials.get('SUBREDDITS_TO_MONITOR'):
+            for submission in self.reddit.subreddit(sub_reddit).\
+                    hot(limit=self.credentials.get('SEARCH_LIMIT')):
+                if submission.id in submissions_found:
+                    break
 
-                    if not ignore_submission:
-                        self.process_submission(submission)
-                        submissions_found.append(submission.id)
-                        counter += 1
+                self.process_submission(submission)
+                self.process_comment(submission)
+                submissions_found.append(submission.id)
+                counter += 1
 
-                        with open('submissions_processed.txt', 'a') as f:
-                            f.write(submission.id + '\n')
+                with open('../data/submissions_processed.txt', 'a') as f:
+                    f.write(submission.id + '\n')
 
-        logging.info(str(counter) + ' submission(s) found')
-
-        logging.info('Waiting...')
-        time.sleep(self.credentials.get('WAIT_TIME') * 60)
+                logging.info(str(counter) + ' submission(s) found')
+                logging.info('Waiting...')
+                time.sleep(self.credentials.get('WAIT_TIME'))
 
     @staticmethod
     def get_submissions_processed():
-        if not os.path.isfile('submissions_processed.txt'):
+        if not os.path.isfile('../data/submissions_processed.txt'):
             submissions_processed = []
         else:
-            with open('submissions_processed.txt', 'r') as f:
+            with open('../data/submissions_processed.txt', 'r') as f:
                 submissions_processed = f.read()
                 submissions_processed = submissions_processed.split('\n')
-
         return submissions_processed
 
     def __call__(self, *args, **kwargs):
-        logging.info('Reddit bot running...')
+        logging.info('Bot running...')
         submissions_found = self.get_submissions_processed()
         while True:
             try:
