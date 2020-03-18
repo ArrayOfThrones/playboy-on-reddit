@@ -8,6 +8,10 @@ import os
 
 
 class Bot:
+    """Class responsible for monitoring some Playboy´s r/ and, if something
+    new is detected, a repost is made in r/PlayboyOnReddit.
+
+    """
     def __init__(self):
         self.credentials = read_json('settings.json')
         self.logging_('%(levelname)s: %(asctime)s - %(message)s')
@@ -16,9 +20,26 @@ class Bot:
 
     @staticmethod
     def logging_(logging_format):
+        """This functions initializes the logging function.
+
+        Parameters
+        ----------
+        logging_format : str
+            log format - type: time - message
+
+        Returns
+        -------
+
+        """
         logging.basicConfig(level=logging.INFO, format=logging_format)
 
     def authenticate(self):
+        """This function logs in some reddit´s account.
+
+        Returns
+        -------
+
+        """
         logging.info("Authenticating...")
         reddit = praw.Reddit(
             user_agent=self.credentials.get('USER_AGENT'),
@@ -33,6 +54,18 @@ class Bot:
         return reddit
 
     def process_submission(self, submission):
+        """This function process a post - extracts the information from the
+        original post (title, url) and calls the post function.
+
+        Parameters
+        ----------
+        submission : praw.models.reddit.submission.Submission
+            A reddit´s submission.
+
+        Returns
+        -------
+
+        """
         title = submission.title
         url = submission.url
         x_post = "[r/{}] ".format(submission.subreddit.display_name)
@@ -55,21 +88,24 @@ class Bot:
 
         return new_post_url, new_post_title
 
-    @staticmethod
-    def process_comment(submission, post_url, post_title):
-        x_post = "[r/{}] ".format(submission.subreddit.display_name)
-        playboy_on_reddit = \
-            '[r/playboyonreddit](https://www.reddit.com/r/playboyonreddit)'
-        sub_ = '[{}](https://www.reddit.com/r/{})'.format(
-            x_post, submission.subreddit.display_name)
-        post_ = '[{}]({})'.format(post_title, post_url)
-
-        body = "reddit.\n\n    \u2022 [{}] [{}] {}.".\
-            format(playboy_on_reddit, sub_, post_)
-
-        submission.reply(body)
-
     def new_post(self, subreddit, title, url, source_url):
+        """This function posts in a subreddit.
+
+        Parameters
+        ----------
+        subreddit : praw.models.reddit.subreddit.Subreddit
+            The subreddit´s intance.
+        title : str
+            Post´s title.
+        url : str
+            Post´s url.
+        source_url : str
+            Original post´s url.
+
+        Returns
+        -------
+
+        """
         if self.credentials.get('POST_MODE') == 'direct':
             post = subreddit.submit(title, url=url)
             comment_text = \
@@ -81,14 +117,25 @@ class Bot:
             logging.ERROR('Invalid POST_MODE chosen.')
 
     def monitor(self, submissions_found):
+        """This function monitor the whitelisted subreddits seeking for new
+        posts.
+
+        Parameters
+        ----------
+        submissions_found : praw.models.reddit.submission.Submission
+            A new reddit´s post.
+
+        Returns
+        -------
+
+        """
         counter = 0
         for sub_reddit in self.credentials.get('SUBREDDITS_TO_MONITOR'):
             for submission in self.reddit.subreddit(sub_reddit).\
                     hot(limit=self.credentials.get('SEARCH_LIMIT')):
                 if submission.id in submissions_found:
                     break
-                post_url, post_title = self.process_submission(submission)
-                self.process_comment(submission, post_url, post_title)
+                self.process_submission(submission)
                 submissions_found.append(submission.id)
                 counter += 1
 
@@ -101,6 +148,14 @@ class Bot:
 
     @staticmethod
     def get_submissions_processed():
+        """This function reads the submissions file, parses it and return it.
+
+        Returns
+        -------
+        submissions_processed : list
+            A list with the already-processed submissions.
+
+        """
         if not os.path.isfile('../data/submissions_processed.txt'):
             submissions_processed = []
         else:
