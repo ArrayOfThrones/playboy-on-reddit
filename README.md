@@ -1,15 +1,17 @@
-## PlayboyOnReddit
+# PlayboyOnReddit: Reddit´s BOT
 
-Optimized for python 3.6
+<small>_Optimized for python 3.6_</small>
 
 Bot for monitoring hot posts in some playboy´s subreddits. 
-Once a new post is found, a repost is made at [r/PlayboyOnReddit](https://www.reddit.com/r/playboyonreddit/).
+Once a new post is found, a repost is made at 
+[r/PlayboyOnReddit](https://www.reddit.com/r/playboyonreddit/).
 
-Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit/) are meant to be made only by this bot. 
+Posts on [r/PlayboyOnReddit](https://www.reddit.com/r/PlayboyOnReddit/) are
+ meant to be made only by this bot. 
 
 ----------------------
 
-### Dependencies
+## Dependencies
 
 For installing the requirements, in your ___venv___ or ___anaconda env___, 
 just run the following command:
@@ -20,7 +22,7 @@ pip install -r requirements.txt
 
 ----------------
 
-### Project's Structure
+## Project's Structure
 
 ```bash 
 .
@@ -46,19 +48,20 @@ pip install -r requirements.txt
     └── requirements.txt
 ```
 
-#### Directory description
+### Directory description
 
+- __data:__ The data dir. Group of non-script support files.
 - __docs:__ The documentation dir.
 - __src:__ The scripts & source code dir.
 - __tests:__ The unittests dir.
 
 -----------------------
 
-### Usage Notes
+## Usage Notes
 
 Section aimed on clarifying some running issues.
 
-#### Running
+### Running
 
 For running it, at the `~/src` directory just run the follow command:
 
@@ -66,11 +69,11 @@ For running it, at the `~/src` directory just run the follow command:
 python bot.py
 ``` 
 
-#### JSON Structure
+### JSON Structure
 
 ````json
 {
-  "USER_AGENT": "Created by u/brnpaes.",
+  "USER_AGENT": "Created by u/PlayboyOnReddit.",
   "USERNAME": "username",
   "PASSWORD": "password",
   "CLIENT_ID": "client_id",
@@ -85,9 +88,10 @@ python bot.py
   "POST_MODE": "direct"
 }
 ````
+
 ---------------
 
-#### Monitored r/
+### Monitored r/
 
 - [r/Playboy](https://www.reddit.com/r/playboy)
 - [r/Playboy_Albums](https://www.reddit.com/r/playboy_albums)
