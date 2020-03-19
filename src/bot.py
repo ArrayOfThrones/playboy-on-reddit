@@ -135,6 +135,7 @@ class Bot:
                     hot(limit=self.credentials.get('SEARCH_LIMIT')):
                 if submission.id in submissions_found:
                     break
+
                 self.process_submission(submission)
                 submissions_found.append(submission.id)
                 counter += 1
@@ -144,7 +145,7 @@ class Bot:
 
                 logging.info(str(counter) + ' submission(s) found')
                 logging.info('Waiting...')
-                time.sleep(self.credentials.get('WAIT_TIME'))
+                time.sleep(self.credentials.get('WAIT_TIME') * 600)
 
     @staticmethod
     def get_submissions_processed():
@@ -172,7 +173,7 @@ class Bot:
                 self.monitor(submissions_found)
             except Exception as e:
                 logging.warning("Random exception occurred: {}".format(e))
-                time.sleep(self.credentials.get('WAIT_TIME'))
+                time.sleep(self.credentials.get('WAIT_TIME') * 60)
 
 
 if __name__ == '__main__':
