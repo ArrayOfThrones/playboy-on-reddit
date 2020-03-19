@@ -11,6 +11,9 @@ class Bot:
     """Class responsible for monitoring some Playboy´s r/ and, if something
     new is detected, a repost is made in r/PlayboyOnReddit.
 
+    >>> from bot import Bot
+    >>> Bot().__call__()
+
     """
     def __init__(self):
         self.credentials = read_json('settings.json')

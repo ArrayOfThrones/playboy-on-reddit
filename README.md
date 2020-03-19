@@ -63,11 +63,19 @@ Section aimed on clarifying some running issues.
 
 ### Running
 
-For running it, at the `~/src` directory just run the follow command:
+For running it, at the `~/src` directory just run:
 
 ```shell script
 python bot.py
 ``` 
+
+or, if importing it as a module, just run:
+````python
+from bot import Bot
+
+if __name__ == '__main__':
+    Bot().__call__()
+````
 
 ### JSON Structure
 
@@ -95,5 +103,9 @@ python bot.py
 
 - [r/Playboy](https://www.reddit.com/r/playboy)
 - [r/Playboy_Albums](https://www.reddit.com/r/playboy_albums)
+
+<small>_obs: If you know of any sub that should be being monitored, 
+please send a direct to moderators or make a commentary on this_ 
+[_post_](https://www.reddit.com/r/PlayboyOnReddit/comments/fkr4o6/what_is_rplayboyonreddit/). </small>
 
 ---------------
