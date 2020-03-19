@@ -137,7 +137,7 @@ class Bot:
             for submission in self.reddit.subreddit(sub_reddit).\
                     hot(limit=self.credentials.get('SEARCH_LIMIT')):
                 if submission.id in submissions_found:
-                    break
+                    continue
 
                 self.process_submission(submission)
                 submissions_found.append(submission.id)
