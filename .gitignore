@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 
 # JSON files within src
-src/*.json
+*.json
