@@ -139,6 +139,10 @@ class Bot:
                 if submission.id in submissions_found:
                     continue
 
+                if submission.link_flair_text in \
+                        self.credentials.get('BLACKLIST'):
+                    continue
+
                 self.process_submission(submission)
                 submissions_found.append(submission.id)
                 counter += 1
