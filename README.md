@@ -91,6 +91,10 @@ if __name__ == '__main__':
     "playboy", 
     "Playboy_Albums"
   ],
+  "BLACKLIST": [
+    "Request",
+    "Discussion"
+  ],
   "SEARCH_LIMIT": 1,
   "WAIT_TIME": 3,
   "POST_MODE": "direct"
