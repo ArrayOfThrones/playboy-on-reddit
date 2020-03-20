@@ -37,7 +37,7 @@ pip install -r requirements.txt
     │   ├── __init__.py
     │   ├── bot.py
     │   ├── helpers.py
-    │   └── bot.py
+    │   └── settings.json
     ├── tests
     │   └── unittests
     │       ├── data
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     Bot().__call__()
 ````
 
-### JSON Structure
+### JSON structure
 
 ````json
 {
@@ -100,6 +100,8 @@ if __name__ == '__main__':
   "POST_MODE": "direct"
 }
 ````
+
+_obs: in order to run this application you must have a json file at `~/src/settings.json`. This json must follow the structure above._
 
 ---------------
 
