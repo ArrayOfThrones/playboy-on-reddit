@@ -152,7 +152,7 @@ class Bot:
 
                 logging.info(str(counter) + ' submission(s) found')
                 logging.info('Waiting...')
-                time.sleep(self.credentials.get('WAIT_TIME') * 600)
+                time.sleep(self.credentials.get('WAIT_TIME') * 60)
 
     @staticmethod
     def get_submissions_processed():
