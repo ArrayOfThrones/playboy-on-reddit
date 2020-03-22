@@ -88,15 +88,16 @@ if __name__ == '__main__':
   "CLIENT_SECRET": "client_secret",
   "SUBREDDIT_TO_POST": "PlayboyOnReddit",
   "SUBREDDITS_TO_MONITOR" : [
-    "playboy", 
-    "Playboy_Albums"
+    "playboy",
+    "Playboy_Albums",
+    "playboy_playmates"
   ],
   "BLACKLIST": [
     "Request",
     "Discussion"
   ],
-  "SEARCH_LIMIT": 1,
-  "WAIT_TIME": 3,
+  "SEARCH_LIMIT": 6,
+  "WAIT_TIME": 1,
   "POST_MODE": "direct"
 }
 ````
