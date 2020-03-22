@@ -113,6 +113,6 @@ _obs: in order to run this application you must have a json file at `~/src/setti
 
 <small>_obs: If you know of any sub that should be being monitored, 
 please send a direct to moderators or make a commentary on this_ 
-[_post_](https://www.reddit.com/r/PlayboyOnReddit/comments/fkr4o6/what_is_rplayboyonreddit/). </small>
+[_post_](https://www.reddit.com/r/PlayboyOnReddit/comments/flh4i0/whats_rplayboyonreddit/). </small>
 
 ---------------
