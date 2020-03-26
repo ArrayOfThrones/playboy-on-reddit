@@ -2,7 +2,6 @@
 from helpers import read_json
 
 import logging
-import time
 import praw
 import os
 
@@ -21,6 +20,7 @@ class Bot:
 
         self.reddit = self.authenticate()
 
+    # used in __init__
     @staticmethod
     def logging_(logging_format):
         """This functions initializes the logging function.
@@ -34,8 +34,9 @@ class Bot:
         -------
 
         """
-        logging.basicConfig(level=logging.INFO, format=logging_format)
+        logging.basicConfig(filename='../data/run_log.log', level=logging.INFO, format=logging_format)
 
+    # used in __init__
     def authenticate(self):
         """This function logs in some reddit´s account.
 
@@ -43,8 +44,7 @@ class Bot:
         -------
 
         """
-        logging.info("Authenticating...")
-        reddit = praw.Reddit(
+        return praw.Reddit(
             user_agent=self.credentials.get('USER_AGENT'),
             client_id=self.credentials.get('CLIENT_ID'),
             client_secret=self.credentials.get('CLIENT_SECRET'),
@@ -52,10 +52,7 @@ class Bot:
             password=self.credentials.get('PASSWORD')
         )
 
-        logging.info("Authenticated as {}".format(reddit.user.me()))
-
-        return reddit
-
+    # used in monitor
     def process_submission(self, submission):
         """This function process a post - extracts the information from the
         original post (title, url) and calls the post function.
@@ -91,6 +88,7 @@ class Bot:
 
         return new_post_url, new_post_title
 
+    # used in process_submission
     def new_post(self, subreddit, title, url, source_url):
         """This function posts in a subreddit.
 
@@ -119,6 +117,7 @@ class Bot:
         else:
             logging.ERROR('Invalid POST_MODE chosen.')
 
+    # used in __call__
     def monitor(self, submissions_found):
         """This function monitor the whitelisted subreddits seeking for new
         posts.
@@ -151,9 +150,8 @@ class Bot:
                     f.write(submission.id + '\n')
 
                 logging.info(str(counter) + ' submission(s) found')
-                logging.info('Waiting...')
-                time.sleep(self.credentials.get('WAIT_TIME') * 60)
 
+    # used in __call__
     @staticmethod
     def get_submissions_processed():
         """This function reads the submissions file, parses it and return it.
@@ -173,14 +171,11 @@ class Bot:
         return submissions_processed
 
     def __call__(self, *args, **kwargs):
-        logging.info('Bot running...')
         submissions_found = self.get_submissions_processed()
-        while True:
-            try:
-                self.monitor(submissions_found)
-            except Exception as e:
-                logging.warning("Random exception occurred: {}".format(e))
-                time.sleep(self.credentials.get('WAIT_TIME') * 60)
+        try:
+            self.monitor(submissions_found)
+        except Exception as e:
+            logging.warning("Random exception occurred: {}".format(e))
 
 
 if __name__ == '__main__':
