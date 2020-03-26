@@ -97,7 +97,6 @@ if __name__ == '__main__':
     "Discussion"
   ],
   "SEARCH_LIMIT": 6,
-  "WAIT_TIME": 1,
   "POST_MODE": "direct"
 }
 ````
