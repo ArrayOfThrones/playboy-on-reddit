@@ -22,32 +22,3 @@ def read_json(path):
             return json.load(f)
     except FileNotFoundError as e:
         print(e.args[-1])
-
-
-def log_cleaner():
-    """This function cleans out the run_log.log file. This function is meant
-    to run once per month.
-
-    Returns
-    -------
-
-    """
-    open('../data/run_log.log', 'w')
-
-
-def submissions_cleaner():
-    """This function cleans out the submissions_processed.txt file. This
-    function is meant to run once per month.
-
-    Returns
-    -------
-
-    """
-    submission_file = \
-        open('../data/submissions_processed.txt', 'r').read().split('\n')
-
-    last_10 = '\n'.join(submission_file[-11:-1])
-    open('../data/submissions_processed.txt', 'w')
-    open('../data/submissions_processed.txt', 'a').write(
-        last_10
-    )

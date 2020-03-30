@@ -34,7 +34,8 @@ class Bot:
         -------
 
         """
-        logging.basicConfig(filename='../data/run_log.log', level=logging.INFO, format=logging_format)
+        logging.basicConfig(filename='../data/run_log.log',
+                            level=logging.INFO, format=logging_format)
 
     # used in __init__
     def authenticate(self):
