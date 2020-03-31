@@ -22,6 +22,20 @@ pip install -r requirements.txt
 
 ----------------
 
+## Server's CRON
+
+__Bot's cron:__
+```shell script
+0-59/1 * * * * sh /home/ec2-user/PlayboyOnReddit/src/run_bot.sh
+```
+
+__Garbage Collector's cron:__
+```shell script
+00 00 01 * * sh /home/ec2-user/PlayboyOnReddit/src/run_garbage_collectors.sh
+```
+
+----------------
+
 ## Project's Structure
 
 ```bash 
@@ -37,6 +51,8 @@ pip install -r requirements.txt
     │   ├── __init__.py
     │   ├── bot.py
     │   ├── helpers.py
+    │   ├── run_bot.sh
+    │   ├── run_garbage_collectors.sh
     │   └── settings.json
     ├── tests
     │   └── unittests
