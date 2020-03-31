@@ -139,8 +139,10 @@ class Bot:
                 if submission.id in submissions_found:
                     continue
 
-                if submission.link_flair_text in \
-                        self.credentials.get('BLACKLIST'):
+                if (submission.link_flair_text in
+                        self.credentials.get('BLACKLIST')) or \
+                        (any([elem in submission.title for elem in
+                              self.credentials.get('BLACKLIST')])):
                     continue
 
                 self.process_submission(submission)
