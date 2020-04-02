@@ -136,7 +136,8 @@ class Bot:
         for sub_reddit in self.credentials.get('SUBREDDITS_TO_MONITOR'):
             for submission in self.reddit.subreddit(sub_reddit).\
                     hot(limit=self.credentials.get('SEARCH_LIMIT')):
-                if submission.id in submissions_found:
+                if (submission.id in submissions_found) or \
+                        (submission.id in self.credentials.get('IGNORE_ID')):
                     continue
 
                 if (submission.link_flair_text in

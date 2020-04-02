@@ -112,6 +112,10 @@ if __name__ == '__main__':
     "Request",
     "Discussion"
   ],
+  "IGNORE_ID": [
+    "72xlrr",
+    "67sd9y"
+  ],
   "SEARCH_LIMIT": 6,
   "POST_MODE": "direct"
 }
