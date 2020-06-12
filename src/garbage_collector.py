@@ -24,10 +24,10 @@ def submissions_cleaner():
     submission_file = \
         open('../data/submissions_processed.txt', 'r').read().split('\n')
 
-    last_20 = '\n'.join(submission_file[-21:-1])
+    last_50 = '\n'.join(submission_file[-51:-1])
     open('../data/submissions_processed.txt', 'w')
     open('../data/submissions_processed.txt', 'a').write(
-        last_20
+        last_50
     )
 
 
